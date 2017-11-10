@@ -1,0 +1,15 @@
+{% extends "profiles/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block content %}
+    <form action="." method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="col-lg-2 col-md-3 col-sm-3"></div>
+        <h4>Are you sure you want to delete {{ object.name }} {{ object.surname }}?</h4>
+        <div class="col-lg-3 col-md-3 col-sm-3"></div>
+        <div style="margin: 5% 0 0 0" class="col-lg-4 col-md-4 col-sm-4"><input style="width:100pt" class="btn btn-md btn-danger" type="submit" value="Yes"/></div>
+         <div style="margin: 5% 0 0 0" class="col-lg-4 col-md-4 col-sm-4"><a style="width:100pt" class="btn btn-md btn-primary" type="submit"
+                                                                              href="javascript:history.back()">No</a></div>
+    </form>
+{% endblock %}
+style="margin: 0% 0 5% 25%;"

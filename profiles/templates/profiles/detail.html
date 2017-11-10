@@ -1,0 +1,84 @@
+{% extends "profiles/base.html" %}
+{% block detail %}
+    <script language="JavaScript">
+        function toggle(source) {
+            checkboxes = document.getElementsByName('boxes');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+
+    <div class="col-lg-2 col-md-2 col-sm-2" style="margin: 5.4% 2% 0 3%;padding-left: 0;padding-right: 0;width: 100pt;">
+        {#        <form action="." method="post" autocomplete="off">#}
+        {#            {% csrf_token %}#}
+        {#            {% for f in folders %}#}
+        {#                <p><input type="submit" class="btn btn-info btn-sm" value="{{ f }}" name="{{ forloop.counter0 }}" style="width: 90pt;"></p>#}
+        {#            {% endfor %}#}
+        {#        </form>#}
+        {% for f in folders %}
+            <p><a href="{% url 'profiles:detail' account_id forloop.counter0 %}" class="btn btn-info btn-sm "
+                  style="width: 90pt;"
+                  id="{{ f }}">{{ f }}</a></p>
+        {% endfor %}
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <h4>{{ username }}</h4>
+        <form action="." method="post" autocomplete="off">
+            {% csrf_token %}
+            <table class="table table-hover text-nowrap" width="100%">
+                <thead>
+                <tr>
+                    <th style="border: 0" width="5%">
+                        <label class="checkbox">
+                            <input data-toggle="checkbox" type="checkbox" id="all_checkboxes"
+                                   onClick="toggle(this)"/>
+                        </label>
+                    </th>
+                    <th style="border: 0" width="10%">
+                        <a class="btn btn-primary btn-sm" style="margin-right: 3%"
+                           href="{% url 'profiles:send_email' account_id %}" role="button">Write a
+                            message</a>
+                        <a href="." class="btn btn-primary btn-sm" style="width: 70pt; margin-right: 3%">Refresh</a>
+                    </th>
+                    <th style="border: 0"></th>
+                    <th style="border: 0; float:right">
+                        <input type="submit" class="btn btn-danger btn-sm" style="width: 70pt;" name="delete"
+                               value="Delete">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for h in headers %}
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label style="margin: auto" class="checkbox" for="checkbox{{ forloop.counter0 }}">
+                                    <input type="checkbox" data-toggle="checkbox" value="{{ forloop.counter0 }}"
+                                           id="checkbox{{ forloop.counter0 }}" name="boxes"></label>
+                            </div>
+                        </td>
+                        <td style="font-size: 11pt;"
+                            onclick="window.document.location='{% url 'profiles:email_body' account_id folder_index forloop.counter0  %}';">
+                            {{ h.0 }}
+                        </td>
+                        <td style="font-size: 11pt;"
+                            onclick="window.document.location='{% url 'profiles:email_body' account_id folder_index forloop.counter0  %}';">
+                            {{ h.1 }}. . .
+                        </td>
+                        <td style="font-size: 11pt;"
+                            onclick="window.document.location='{% url 'profiles:email_body' account_id folder_index forloop.counter0  %}';"
+                            width="10%">
+                            {{ h.2 }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <script language="JavaScript">
+        var el_id = "{{ folder }}";
+        document.getElementById(el_id).className = "btn btn-block btn-sm btn-inverse"
+    </script>
+{% endblock %}

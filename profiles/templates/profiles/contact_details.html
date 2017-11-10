@@ -1,0 +1,13 @@
+{% extends "profiles/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block content %}
+    <h4>{{ contact.name }} {{ contact.surname }}</h4>
+    <p><span style="color: #3498db">Email: </span>{{ contact.email }}</p>
+    <p><span style="color: #3498db">Phone: </span>{{ contact.phone }}</p>
+    <p><span style="color: #3498db">Info: </span>{{ contact.other_info }}</p>
+    <p><a style="width:150pt" class="btn btn-md btn-primary" type="submit"
+          href="{% url 'profiles:edit_contact' contact.id %}">Edit</a></p>
+    <p><a style="width:150pt" class="btn btn-md btn-danger" type="submit"
+          href="{% url 'profiles:delete_contact' contact.id %}">Delete</a></p>
+{% endblock %}

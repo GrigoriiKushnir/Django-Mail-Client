@@ -1,0 +1,32 @@
+{% extends "profiles/base.html" %}
+
+{% block content %}
+    <h4 style="margin: 0 0 3% 1%">Your accounts are:</h4>
+    <div class="col-md-9">
+        <form action="." method="post" autocomplete="off">
+            {% csrf_token %}
+            {% for account in accounts %}
+                <div class="form-group">
+                    <label class="checkbox" for="checkbox{{ forloop.counter0 }}">
+                        <input type="checkbox" data-toggle="checkbox" value="{{ forloop.counter0 }}"
+                               id="checkbox{{ forloop.counter0 }}" name="boxes">
+                        {{ account.email }}
+                    </label>
+                </div>
+            {% endfor %}
+        {% if accounts %}
+            <p><input style="width:150pt" class="btn btn-md btn-danger" type="submit" value="Delete"/></p>
+        {% endif %}
+        </form>
+    </div>
+
+    <div class="col-md-2">
+    <a style="width:150pt; margin: 0 0 15% 0" class="btn btn-md btn-primary" href="{% url 'auth_password_change' %}"
+       role="button">Change profile password</a>
+    </div>
+    <div class="col-md-2">
+    <a style="width:150pt; margin: 0 0 2% 0" class="btn btn-md btn-danger" href="#"
+       role="button">Delete profile</a>
+    </div>
+
+{% endblock %}

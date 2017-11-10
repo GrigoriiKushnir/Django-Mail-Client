@@ -1,0 +1,37 @@
+{% extends "profiles/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block content %}
+    <h4>Add a contact:</h4>
+    <form class="form-horizontal" action="{% url 'profiles:add_contact' %}" method="post" autocomplete="off"
+          role="form">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <div class="row">
+                    <label for="{{ field.label }}" class="col-lg-2 control-label">{{ field.label }}</label>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        {% render_field field type="text" rows="5" class="form-control" id=field.label %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <p><input style="width: 230pt" class="btn btn-primary btn-lg" type="submit" value="Add"/></p>
+                    <div class="text-danger">
+                        {% for field in form %}
+                            <p>{{ field.errors }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+{% endblock %}

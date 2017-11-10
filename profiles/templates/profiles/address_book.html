@@ -1,0 +1,39 @@
+{% extends "profiles/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block content %}
+    <h4>Your contacts:</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr onclick="window.document.location='{% url 'profiles:contact_details' contact.id %}';">
+                <td>
+                    {{ contact.name }}
+                </td>
+                <td>
+                   {{ contact.surname }}
+                </td>
+                <td>
+                    {{ contact.email }}
+                </td>
+                <td>
+                    {{ contact.phone }}
+                </td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+    <p><a style="width:150pt" class="btn btn-md btn-primary" type="submit"
+          href="{% url 'profiles:add_contact' %}">Add a contact</a></p>
+
+{% endblock %}

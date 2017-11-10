@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <form method="post" action=".">
+        {% csrf_token %}
+        <div class="login-form" style="margin: 10% 20% 10%; width:400pt;">
+            <h4 style="margin: 0 0 5% 20%;">Register on Mail App</h4>
+            <div class="form-group">
+                {% render_field form.username type="text" class="form-control login-field" value="" placeholder="Enter your name" id="login-name" %}
+                <label class="login-field-icon fui-user" for="login-name"></label>
+            </div>
+
+            <div class="form-group">
+                {% render_field form.email type="email" class="form-control login-field" value="" placeholder="Enter your email" id="login-email" %}
+                <label class="login-field-icon fui-mail" for="login-email"></label>
+            </div>
+            <div class="form-group">
+                {% render_field form.password1 type="password" class="form-control login-field" value="" placeholder="Enter your password" id="login-pass1" %}
+                <label class="login-field-icon fui-lock" for="login-pass1"></label>
+            </div>
+            <div class="form-group">
+                {% render_field form.password2 type="password" class="form-control login-field" value="" placeholder="Repeat password" id="login-pass2" %}
+                <label class="login-field-icon fui-lock" for="login-pass2"></label>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="{% trans 'Register' %}"/>
+            <a class="login-field" style="margin:43%" href="{% url 'login' %}">or Log in</a>
+            <div class="text-danger">
+                {% for field in form %}
+                    <p>{{ field.errors }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+{% endblock %}

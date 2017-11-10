@@ -1,0 +1,38 @@
+{% extends "profiles/base.html" %}
+{% block content %}
+    {% load staticfiles %}
+    {% load widget_tweaks %}
+
+    <form action="{% url 'profiles:add_account' %}" method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="login-form" style="margin: 10% 20% 10%; width:400pt;">
+            <h4 style="margin: 0 0 5% 30%;">Add an account</h4>
+            <div class="form-group">
+                {% render_field form.email type="email" class="form-control login-field" value="" placeholder="Enter your email" id="account-email" %}
+                <label class="login-field-icon fui-mail" for="account-email"></label>
+            </div>
+
+            <div class="form-group">
+                {% render_field form.password type="password" class="form-control login-field" value="" placeholder="Enter your password" id="account-email" %}
+                <label class="login-field-icon fui-lock" for="account-email"></label>
+            </div>
+            <div class="form-group">
+                {% render_field form.imap type="text" class="form-control login-field" value="" placeholder="Enter IMAP server" id="account-imap" %}
+            </div>
+            <div class="form-group">
+                {% render_field form.smtp type="text" class="form-control login-field" value="" placeholder="Enter SMTP server" id="account-smtp" %}
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit"/>
+            <div class="text-danger">
+                {% if error %}
+                    <ul>
+                    <li style="margin: 3%"><p>{{ error }}</p></li>
+                    </ul>
+                {% endif %}
+                {% for field in form %}
+                    <p>{{ field.errors }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+{% endblock %}

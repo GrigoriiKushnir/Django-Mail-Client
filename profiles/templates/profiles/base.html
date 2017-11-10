@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mail App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    {% load staticfiles %}
+
+    <!-- Loading Bootstrap -->
+    <link href="{% static 'dist/css/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="{% static 'dist/css/flat-ui.min.css' %}" rel="stylesheet">
+    <link href="{% static 'docs/assets/css/demo.css' %}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-6">
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+            <a class="navbar-brand" href="{% url 'profiles:index' %}">Home</a>
+            <a class="navbar-brand" href="{% url 'profiles:address_book' %}">Address Book</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-6">
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'profiles:settings' %}"><span class="visible-sm visible-xs">Settings<span
+                        class="fui-gear"></span></span><span
+                        class="visible-md visible-lg"><span class="fui-gear"></span></span></a></li>
+                <li><a href="/accounts/logout/"><span class="visible-sm visible-xs">Log out<span
+                        class="fui-exit"></span></span><span
+                        class="visible-md visible-lg"><span class="fui-exit"></span></span></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</header>
+{% block detail %}
+{% endblock %}
+<div class="container" >
+    {% block content %}
+    {% endblock %}
+</div>
+
+<!-- /.container -->
+
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+<script src="{% static 'dist/js/vendor/jquery.min.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'docs/assets/js/application.js' %}"></script>
+<script src="{% static 'dist/js/flat-ui.min.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <h4 style="margin: 30% 0 5% 43%;">Logged out!</h4>
+    <a class="btn btn-primary btn-hg" style="margin:0 0 0 23%; width: 400pt" href="{% url 'login' %}">Log in</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "profiles/base.html" %}
+{% block content %}
+    <div class="login-form" style="margin: 10% 20% 10%; width:400pt;">
+        <h4 style="margin: 0 0 5% 26%;">Choose an account</h4>
+        <div style="margin: 0 0 0 13%; width:280pt "class="btn-group-vertical">
+            {% for account in accounts %}
+                <a style="border-radius: 0;" class="btn btn-primary btn-lg btn-embossed" type="button"
+                   href="{% url 'profiles:detail' account.id 0 %}">{{ account.email }}</a>
+            {% endfor %}
+            <p><a style="margin: 34%;" class="login-field" type="button"
+                  href="{% url 'profiles:add_account' %}">Add an account</a></p>
+        </div>
+    </div>
+{% endblock %}
